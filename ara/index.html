@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ara's Gallery</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <a href="gallery.html">
+        <div class="middle" id="middle-box">
+            <img src="ara1.jpg" id="profile" width="100%">
+            <h3>Ara's Gallery?</h3>
+        </div>
+    </a>
+    </body>
+
+    <script>
+        // JavaScript to handle hover and change body background
+        const middleBox = document.getElementById('middle-box');
+        
+        middleBox.addEventListener('mouseenter', () => {
+            document.body.classList.add('hover-effect');
+        });
+
+        middleBox.addEventListener('mouseleave', () => {
+            document.body.classList.remove('hover-effect');
+        });
+    </script>
+</html>

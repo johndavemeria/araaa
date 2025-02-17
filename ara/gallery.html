@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gallery</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                margin-top: 50px;
+                background-color: #f5f5f5;
+            }
+
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+                padding: 10px;
+                max-width: 1200px; /* Limit max width of gallery */
+                width: 100%;
+            }
+
+            .gallery img {
+                border-radius: 10px;
+                width: 200px;
+                height: auto;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease, opacity 0.5s ease;
+                opacity: 0;
+                transform: translateY(20px);
+                cursor: pointer;
+                position: relative; /* To allow z-index to work */
+            }
+
+            .gallery img.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .gallery img:hover {
+                transform: scale(1.1);
+            }
+
+            .focused {
+                transform: scale(1.5); /* Enlarge the image when focused */
+                z-index: 10; /* Make sure the focused image is above others */
+                transition: transform 0.3s ease;
+            }
+
+            a {
+                position: absolute;
+                top: 5px;
+                left: 30px;
+                text-decoration: none;
+                color: black;
+                border: 2px solid black;
+                border-radius: 10px;
+                width: 100px;
+                text-align: center;
+                transition: 0.5s ease;
+            }
+
+            a:hover {
+                color: white;
+                background-color: black;
+                transform: scale(0.85);
+            }
+
+            /* Mobile responsiveness: Display 2 images per row */
+            @media (max-width: 768px) {
+                .gallery img {
+                    width: 45%; /* 2 images per row */
+                }
+            }
+
+            /* Further adjustment for very small screens (e.g., mobile phones) */
+            @media (max-width: 480px) {
+                .gallery img {
+                    width: 45%; /* 2 images per row on very small screens */
+                }
+                a {
+                    width: 80px; /* Smaller back button on mobile */
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <a href="index.html">Back</a>
+        <div class="gallery">
+            <img src="ara2.jpg" alt="Image 1">
+            <img src="ara3.jpg" alt="Image 2">
+            <img src="ara4.jpg" alt="Image 3">
+            <img src="ara5.jpg" alt="Image 4">
+            <img src="ara6.jpg" alt="Image 5">
+            <img src="ara7.jpg" alt="Image 6">
+            <img src="ara8.jpg" alt="Image 7">
+            <img src="ara9.jpg" alt="Image 8">
+            <img src="ara10.jpg" alt="Image 9">
+            <img src="ara11.jpg" alt="Image 10">
+            <img src="ara12.jpg" alt="Image 11">
+            <img src="ara13.jpg" alt="Image 12">
+            <img src="ara14.jpg" alt="Image 13">
+            <img src="ara15.jpg" alt="Image 14">
+            <img src="ara16.jpg" alt="Image 15">
+            <img src="ara17.jpg" alt="Image 16">
+            <img src="ara18.jpg" alt="Image 17">
+            <img src="ara20.jpg" alt="Image 19">
+            <img src="ara21.jpg" alt="Image 20">
+            <img src="ara22.jpg" alt="Image 21">
+            <img src="ara23.jpg" alt="Image 22">
+        </div>
+
+        <script>
+            const images = document.querySelectorAll(".gallery img");
+            let focusedImage = null; // To track the currently focused image
+
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    // If the clicked image is already focused, remove the focus
+                    if (focusedImage === img) {
+                        img.classList.remove('focused');
+                        focusedImage = null;
+                    } else {
+                        // Remove focus from the previously focused image, if any
+                        if (focusedImage) {
+                            focusedImage.classList.remove('focused');
+                        }
+                        // Focus on the clicked image
+                        img.classList.add('focused');
+                        focusedImage = img;
+                    }
+                });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    } else {
+                        entry.target.classList.remove("visible");
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            images.forEach(img => {
+                observer.observe(img);
+            });
+        </script>
+    </body>
+</html>
